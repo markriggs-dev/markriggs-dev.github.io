@@ -386,8 +386,9 @@
             <p class="card-description">
               Full-stack job search tracker built as a distributed microservices system. Demonstrates
               Kafka async messaging, SignalR real-time push, YARP reverse proxy, Auth0 authentication,
-              AI-assisted resume generation via Anthropic Claude, and a React frontend &mdash; all
-              independently deployable services behind an API gateway.
+              AI-assisted resume generation via Anthropic Claude, user feedback delivered end-to-end
+              via Kafka and MailKit SMTP, and a React frontend &mdash; all independently deployable
+              services behind an API gateway.
             </p>
             <div class="card-badges">
               <span class="badge badge-accent">.NET 8</span>
@@ -442,6 +443,10 @@
               back to the React frontend via TanStack Query invalidation. The AI Service assembles tailored
               resume prompts server-side &mdash; fetching the job description, experience document, and
               user-defined AI profile instructions &mdash; ready to paste directly into Claude.ai.
+              User feedback follows the same async pattern: the Notification Service publishes a
+              <code>feedback.submitted</code> event to Kafka and returns 202, then its own consumer
+              picks up the message and delivers the email via MailKit SMTP &mdash; decoupling the HTTP
+              response from the mail call.
               The production VPS was provisioned with Terraform &mdash; VM, SSH key, and firewall declared
               as code via the Akamai (Linode) provider.
             </p>
@@ -500,7 +505,7 @@
               </div>
               <div class="arch-node node-service">
                 <div class="arch-node-name">Notification Service</div>
-                <div class="arch-node-sub">Kafka consumer &middot; logging</div>
+                <div class="arch-node-sub">Kafka consumer &middot; MailKit SMTP</div>
               </div>
               <div class="arch-node node-service">
                 <div class="arch-node-name">Experience Service</div>
@@ -520,7 +525,7 @@
             <div class="arch-row arch-row-wrap">
               <div class="arch-node node-kafka">
                 <div class="arch-node-name">Apache Kafka</div>
-                <div class="arch-node-sub">job.created &middot; job.updated</div>
+                <div class="arch-node-sub">job.created &middot; job.updated &middot; feedback.submitted</div>
               </div>
               <div class="arch-node node-storage">
                 <div class="arch-node-name">MinIO Object Store</div>
@@ -626,6 +631,14 @@
             <div>
               <p class="doc-card-title">AI Service</p>
               <p class="doc-card-desc">AI profile management and server-side prompt assembly via Anthropic Claude &mdash; generates tailored resume prompts</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/markriggs-dev/job-tracker-app-notification-service" target="_blank" rel="noopener noreferrer" class="doc-card fade-in">
+            <div class="doc-card-icon" aria-hidden="true">&#x1F4E7;</div>
+            <div>
+              <p class="doc-card-title">Notification Service</p>
+              <p class="doc-card-desc">Kafka consumer with MailKit SMTP &mdash; delivers user feedback emails via the feedback.submitted topic</p>
             </div>
           </a>
 
