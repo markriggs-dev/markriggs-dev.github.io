@@ -384,7 +384,8 @@
             <p class="card-description">
               Full-stack job search tracker built as a distributed microservices system. Demonstrates
               Kafka async messaging, SignalR real-time push, YARP reverse proxy, Auth0 authentication,
-              and a React frontend &mdash; all independently deployable services behind an API gateway.
+              AI-assisted resume generation via Anthropic Claude, and a React frontend &mdash; all
+              independently deployable services behind an API gateway.
             </p>
             <div class="card-badges">
               <span class="badge badge-accent">.NET 8</span>
@@ -398,6 +399,7 @@
               <span class="badge">YARP</span>
               <span class="badge">MinIO</span>
               <span class="badge">EF Core</span>
+              <span class="badge">Anthropic</span>
             </div>
             <div class="card-actions">
               <a href="https://github.com/markriggs-dev/job-tracker-app-docs" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
@@ -435,7 +437,9 @@
               The Job Service publishes to Kafka and returns 202 immediately &mdash; the consumer handles the
               DB write asynchronously. All traffic enters through a YARP gateway on port 5000, which validates
               Auth0 JWTs before routing downstream. SignalR at the consumer layer pushes real-time updates
-              back to the React frontend via TanStack Query invalidation.
+              back to the React frontend via TanStack Query invalidation. The AI Service assembles tailored
+              resume prompts server-side &mdash; fetching the job description, experience document, and
+              user-defined AI profile instructions &mdash; ready to paste directly into Claude.ai.
             </p>
             <a href="https://github.com/markriggs-dev/job-tracker-app-docs" target="_blank" rel="noopener noreferrer" class="arch-link">
               View Architecture Decision Records on GitHub &rarr;
@@ -494,6 +498,14 @@
                 <div class="arch-node-name">Notification Service</div>
                 <div class="arch-node-sub">Kafka consumer &middot; logging</div>
               </div>
+              <div class="arch-node node-service">
+                <div class="arch-node-name">Experience Service</div>
+                <div class="arch-node-sub">.NET 8 &middot; MinIO</div>
+              </div>
+              <div class="arch-node node-service">
+                <div class="arch-node-name">AI Service</div>
+                <div class="arch-node-sub">Anthropic &middot; MinIO</div>
+              </div>
             </div>
 
             <div class="arch-connector">
@@ -508,7 +520,7 @@
               </div>
               <div class="arch-node node-storage">
                 <div class="arch-node-name">MinIO Object Store</div>
-                <div class="arch-node-sub">Resume file storage</div>
+                <div class="arch-node-sub">Resumes &middot; Experience docs &middot; AI output</div>
               </div>
             </div>
 
@@ -586,6 +598,30 @@
             <div>
               <p class="doc-card-title">React Frontend</p>
               <p class="doc-card-desc">TypeScript + Vite SPA with TanStack Query and SignalR real-time updates</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/markriggs-dev/job-tracker-app-job-service-consumer" target="_blank" rel="noopener noreferrer" class="doc-card fade-in">
+            <div class="doc-card-icon" aria-hidden="true">&#x1F4E8;</div>
+            <div>
+              <p class="doc-card-title">Job Service Consumer</p>
+              <p class="doc-card-desc">Kafka consumer that writes jobs to PostgreSQL and pushes real-time SignalR events to the frontend</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/markriggs-dev/job-tracker-app-experience-service" target="_blank" rel="noopener noreferrer" class="doc-card fade-in">
+            <div class="doc-card-icon" aria-hidden="true">&#x1F4C4;</div>
+            <div>
+              <p class="doc-card-title">Experience Service</p>
+              <p class="doc-card-desc">Work experience document upload and MinIO blob storage &mdash; feeds content into AI resume prompts</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/markriggs-dev/job-tracker-app-ai-service" target="_blank" rel="noopener noreferrer" class="doc-card fade-in">
+            <div class="doc-card-icon" aria-hidden="true">&#x1F916;</div>
+            <div>
+              <p class="doc-card-title">AI Service</p>
+              <p class="doc-card-desc">AI profile management and server-side prompt assembly via Anthropic Claude &mdash; generates tailored resume prompts</p>
             </div>
           </a>
 
