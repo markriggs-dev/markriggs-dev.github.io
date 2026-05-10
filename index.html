@@ -154,6 +154,7 @@
             <div class="tech-grid">
               <div class="tech-item"><i class="devicon-docker-plain colored" aria-hidden="true"></i><span class="tech-item-name">Docker</span></div>
               <div class="tech-item"><i class="devicon-kubernetes-plain colored" aria-hidden="true"></i><span class="tech-item-name">Kubernetes</span></div>
+              <div class="tech-item"><i class="devicon-terraform-plain colored" aria-hidden="true"></i><span class="tech-item-name">Terraform</span></div>
               <div class="tech-item"><span class="tech-icon-text" aria-hidden="true">A0</span><span class="tech-item-name">Auth0</span></div>
               <div class="tech-item"><span class="tech-icon-text" aria-hidden="true">Ok</span><span class="tech-item-name">Okta</span></div>
               <div class="tech-item"><i class="devicon-github-original colored" aria-hidden="true"></i><span class="tech-item-name">GitHub Actions</span></div>
@@ -295,6 +296,7 @@
               <span class="badge badge-aws">SQS / SNS</span>
               <span class="badge badge-aws">Cognito</span>
               <span class="badge">Serverless</span>
+              <span class="badge">Terraform</span>
               <span class="badge">IaC</span>
             </div>
           </div>
@@ -440,6 +442,8 @@
               back to the React frontend via TanStack Query invalidation. The AI Service assembles tailored
               resume prompts server-side &mdash; fetching the job description, experience document, and
               user-defined AI profile instructions &mdash; ready to paste directly into Claude.ai.
+              The production VPS was provisioned with Terraform &mdash; VM, SSH key, and firewall declared
+              as code via the Akamai (Linode) provider.
             </p>
             <a href="https://github.com/markriggs-dev/job-tracker-app-docs" target="_blank" rel="noopener noreferrer" class="arch-link">
               View Architecture Decision Records on GitHub &rarr;
