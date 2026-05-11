@@ -403,6 +403,8 @@
               <span class="badge">MinIO</span>
               <span class="badge">EF Core</span>
               <span class="badge">Anthropic</span>
+              <span class="badge">xUnit</span>
+              <span class="badge">Vitest</span>
             </div>
             <div class="card-actions">
               <a href="https://github.com/markriggs-dev/job-tracker-app-docs" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
@@ -574,7 +576,7 @@
             <div class="doc-card-icon" aria-hidden="true">&#x1F4CB;</div>
             <div>
               <p class="doc-card-title">Architecture Decision Records</p>
-              <p class="doc-card-desc">ADRs documenting key decisions &mdash; Kafka vs REST, gateway pattern, async 202 tradeoffs</p>
+              <p class="doc-card-desc">10 ADRs covering Kafka vs REST, gateway pattern, async 202, testing strategy, and more</p>
             </div>
           </a>
 
@@ -639,6 +641,14 @@
             <div>
               <p class="doc-card-title">Notification Service</p>
               <p class="doc-card-desc">Kafka consumer with MailKit SMTP &mdash; delivers user feedback emails via the feedback.submitted topic</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/markriggs-dev/job-tracker-app-job-service/tree/main/tests" target="_blank" rel="noopener noreferrer" class="doc-card fade-in">
+            <div class="doc-card-icon" aria-hidden="true">&#x2705;</div>
+            <div>
+              <p class="doc-card-title">Unit Tests &amp; CI Pipeline</p>
+              <p class="doc-card-desc">xUnit + Moq service tests and Vitest utility tests &mdash; CI gates block deployment on failure</p>
             </div>
           </a>
 
